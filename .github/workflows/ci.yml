@@ -1,4 +1,4 @@
-name: Our first python CI
+name: python CI with matrix method
 
   on:
     push:
@@ -7,8 +7,12 @@ name: Our first python CI
       branches: [ "main" ]
 
   jobs:
-    My-first-CI:
-      runs-on: ubuntu-latest
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
 
       steps:
       - uses: actions/checkout@v3
